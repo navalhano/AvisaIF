@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { useState } from "react";
+import { SafeAreaView } from "react-native-safe-area-context";
 import {
   Text,
   View,
@@ -7,34 +7,33 @@ import {
   TextInput,
   FlatList,
   Pressable,
-} from 'react-native';
-import {Nav} from '../components/nav'
-import {Card} from '../components/Card'
+} from "react-native";
+import { router } from "expo-router";
+import { Nav } from "../components/nav";
+import { Card } from "../components/Card";
+import { useApp } from "../hooks/useAppHook";
 
-
-
-export function HomeScreen({ eventos, avisos, navigation }) {
+const Home = () => {
   const [expanded, setExpanded] = useState(false);
-
+  const { eventos, avisos } = useApp();
   return (
     <SafeAreaView style={styles.container}>
-      <Nav/>
+      <Nav />
 
       <View style={styles.list}>
         <FlatList
           data={eventos}
           keyExtractor={(item) => item.id}
-          renderItem={({ item }) => <Card evento={true} item={item}/>}
+          renderItem={({ item }) => <Card evento item={item} />}
         />
       </View>
-      <Text>
-</Text>
+      <Text></Text>
 
       <View style={styles.list}>
         <FlatList
           data={avisos}
           keyExtractor={(item) => item.id}
-          renderItem={({ item }) => <Card aviso= {true} item={item}/>}
+          renderItem={({ item }) => <Card aviso item={item} />}
         />
       </View>
       <>
@@ -42,14 +41,16 @@ export function HomeScreen({ eventos, avisos, navigation }) {
           <>
             <Pressable
               style={[styles.option, { bottom: 90 }]}
-              onPress={() => navigation.navigate('CreateEvent')}>
-              <Text style= {{fontFamily: 'Poppins_400Regular'}}>Evento</Text>
+              onPress={() => router.push("/create-event")}
+            >
+              <Text style={{ fontFamily: "Poppins_400Regular" }}>Evento</Text>
             </Pressable>
 
             <Pressable
               style={[styles.option, { bottom: 140 }]}
-              onPress={() => navigation.navigate('CreateAviso')}>
-              <Text style= {{fontFamily: 'Poppins_400Regular'}}>Aviso</Text>
+              onPress={() => router.push("/create-aviso")}
+            >
+              <Text style={{ fontFamily: "Poppins_400Regular" }}>Aviso</Text>
             </Pressable>
           </>
         )}
@@ -60,28 +61,28 @@ export function HomeScreen({ eventos, avisos, navigation }) {
       </>
     </SafeAreaView>
   );
-}
-
+};
+export default Home;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center'
+    alignItems: "center",
   },
 
   //flatlist de cards
   list: {
-    width: '92%',
-    height: '25%',
+    width: "92%",
+    height: "25%",
     borderRadius: 20,
     padding: 10,
     marginTop: 20,
-    backgroundColor: '#b6fca4',
-    justifyContent: 'center',
+    backgroundColor: "#b6fca4",
+    justifyContent: "center",
   },
-  
+
   //fab
   fab: {
-    position: 'absolute',
+    position: "absolute",
     bottom: 20,
     right: 20,
 
@@ -90,32 +91,29 @@ const styles = StyleSheet.create({
 
     borderRadius: 30,
 
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
 
-    backgroundColor: '#34b514',
+    backgroundColor: "#34b514",
 
     elevation: 5, // Android
   },
 
   fabText: {
     fontSize: 20,
-    fontWeight: 'bold',
-    color: 'white',
+    fontWeight: "bold",
+    color: "white",
   },
   //fab options
   option: {
-    position: 'absolute',
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: '25%',
-    height: '5%',
+    position: "absolute",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "25%",
+    height: "5%",
     right: 20,
     padding: 7,
     borderRadius: 12,
-    backgroundColor: '#34b514',
-
-    
-
+    backgroundColor: "#34b514",
   },
 });

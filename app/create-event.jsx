@@ -1,16 +1,18 @@
 import { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import MaskInput from "react-native-mask-input";
-import { Text, View, TextInput, Pressable, StyleSheet } from "react-native";
-/* import {
-  useFonts,
-  Poppins_400Regular,
-  Poppins_700Bold,
-} from '@expo-google-fonts/poppins'; */
+import { router } from "expo-router";
+import { Text, View, Pressable, StyleSheet } from "react-native";
+import { useApp } from "../hooks/useAppHook";
 import { Nav } from "../components/nav";
+import ThemedTextInput from "../components/ThemedTextInput";
+import ThemedText from "../components/ThemedText";
+import ThemedButton from "../components/ThemedButton";
+
 const dataMask = [/\d/, /\d/, "/", /\d/, /\d/, "/", /\d/, /\d/, /\d/, /\d/];
 
-export function CreateEventForm({ eventos, setEventos, navigation }) {
+export default function CreateEventForm() {
+  const { addEvento } = useApp();
   function newEvent(title, data, descricao) {
     return {
       id: Date.now().toString(),
@@ -21,11 +23,11 @@ export function CreateEventForm({ eventos, setEventos, navigation }) {
   }
   function criarEvento() {
     const evento = newEvent(title, data, descricao);
-    setEventos([...eventos, evento]);
+    addEvento(evento);
     setTitle("");
     setData("");
     setDescricao("");
-    navigation.goBack();
+    router.back();
   }
   const [title, setTitle] = useState("");
   const [data, setData] = useState("");
@@ -34,48 +36,35 @@ export function CreateEventForm({ eventos, setEventos, navigation }) {
     <SafeAreaView style={styles.container}>
       <Nav />
       <View style={styles.view}>
-        <TextInput
-          style={styles.text}
+        <ThemedTextInput
           placeholder="Nome do evento"
           value={title}
-          onChangeText={setTitle}
+          onChangeText={setTitle} style={styles.text}
         />
         <MaskInput
-          style={styles.text}
+          style={[styles.text, {backgroundColor: "#d6f6da"}]}
           placeholder="Data (DD/MM/AAAA)"
           value={data}
           onChangeText={(masked) => setData(masked)}
           mask={dataMask}
           keyboardType="numeric"
         />
-        <TextInput
-          style={styles.text}
+        <ThemedTextInput
           placeholder="Descrição"
           value={descricao}
-          onChangeText={setDescricao}
+          onChangeText={setDescricao} style={styles.text}
         />
         <View style={styles.buttonContainer}>
-          <Pressable
-            onPress={criarEvento}
-            style={({ pressed }) => [
-              styles.button,
-              pressed && styles.buttonPressed,
-            ]}
-          >
-            {({ pressed }) => (
-              <Text
-                style={[styles.textoBotao, pressed && styles.textoBotaoPressed]}
-              >
-                Criar Evento
-              </Text>
-            )}
-          </Pressable>
-          <Pressable
-            onPress={() => navigation.goBack()}
-            style={styles.cancelButton}
-          >
-            <Text style={styles.textoBotao}>Cancelar</Text>
-          </Pressable>
+          <ThemedButton onPress={criarEvento} style={{width: "40%"}}>
+            <ThemedText title={true}>
+              Criar Evento
+            </ThemedText>
+          </ThemedButton>
+          <ThemedButton onPress={() => router.back()} style={{width: "40%"}}>
+            <ThemedText title={true}>
+              Cancelar
+            </ThemedText>
+          </ThemedButton>
         </View>
       </View>
     </SafeAreaView>
@@ -96,18 +85,18 @@ const styles = StyleSheet.create({
   text: {
     marginBottom: 10,
     padding: 10,
-    backgroundColor: "#b6fca4",
     width: "100%",
     height: "7%",
     borderRadius: 20,
   },
   //botões
   buttonContainer: {
-    flex: 1,
     width: "100%",
     flexDirection: "row",
     justifyContent: "center",
-    margin: 10,
+    alignItems: "center",
+    marginVertical: 10,
+    gap: 15, // se sua versão do RN suportar
   },
   button: {
     width: "40%",
