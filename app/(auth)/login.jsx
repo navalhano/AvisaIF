@@ -1,27 +1,25 @@
 import {
   StyleSheet,
   Text,
+  View,
   Keyboard,
   TouchableWithoutFeedback,
   Image,
 } from "react-native";
 import { Link } from "expo-router";
 import { useState } from "react";
+import ThemedView from "../../components/ThemedView";
+import ThemedTextInput from "../../components/ThemedTextInput";
+import ThemedButton from "../../components/ThemedButton";
+import Spacer from "../../components/Spacer";
+import ThemedText from "../../components/ThemedText";
+
+import Octicons from '@expo/vector-icons/Octicons';
+
 
 const Login = () => {
-  //const [email, setEmail] = useState("");
-  //const [password, setPassword] = useState("");
-  //const [error, setError] = useState(null);
-
-  /* const { user, login } = useUser();
-  const handleSubmit = async () => {
-    setError(null);
-    try {
-      await login(email, password);
-    } catch (error) {
-      setError(error.message);
-    }
-    */
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   return (
 
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -31,37 +29,54 @@ const Login = () => {
           source={require('../../assets/auth_background.png')}
           style={styles.authImage}
         />
-        <Spacer />
-        <ThemedText title={true} style={styles.title}>
-          Bem-vindo de volta!
-        </ThemedText>
-        <ThemedTextInput
-          style={{ width: "80%", marginBottom: 20 }}
-          placeholder="Email"
-          keyboardType="email-address"
-          onChangeText={setEmail}
-          value={email}
-        />
+        <View style={styles.header}>
+          <Image
+            source={require('../../assets/logo.png')}
+            style={{ width: 200, height: 200 }}
+          />
+        </View>
 
-        <ThemedTextInput
-          style={{ width: "80%", marginBottom: 20 }}
-          placeholder="Password"
-          onChangeText={setPassword}
-          value={password}
-          secureTextEntry
-        />
-        <ThemedButton onPress={handleSubmit}>
-          <Text style={{ color: "#f2f2f2" }}>Login</Text>
-        </ThemedButton>
-
-        <Spacer />
-        {error && <Text style={styles.error}>{error}</Text>}
-        <Spacer height={100} />
-        <Link href="/register">
-          <ThemedText style={{ textAlign: "center" }}>
-            Register instead
+        <View style={styles.formContainer}>
+          <ThemedText title={true} style={styles.title}>
+            Bem-vindo de volta!
           </ThemedText>
-        </Link>
+          <ThemedText style={{ right: 60 }}>faça login para continuar</ThemedText>
+          <View style={styles.inputContainer}>
+            <ThemedText style={{ left: 15 }}>E-MAIL</ThemedText>
+            <ThemedTextInput
+              style={{ marginBottom: 20 }}
+              placeholder="exemplo@exemplo.com"
+              keyboardType="email-address"
+              onChangeText={setEmail}
+              value={email}
+            />
+            <ThemedText style={{ left: 15 }}>SENHA</ThemedText>
+            <ThemedTextInput
+              style={{ marginBottom: 20 }}
+              placeholder="Senha"
+              onChangeText={setPassword}
+              value={password}
+              secureTextEntry
+            />
+          </View>
+          <ThemedButton style={{ width: "70%", height: 50, borderRadius: 10 }}>
+            <ThemedText
+              style={{ color: "#f2f2f2", fontWeight: "bold", fontSize: 20 }}
+            >
+              Entrar
+            </ThemedText>
+          </ThemedButton>
+
+          <Spacer />
+          <ThemedText style={{ textAlign: "center" }}>
+            Não tem uma conta?{" "}
+            <Link href="/register" asChild>
+              <Text style={{ color: "green", fontWeight: "bold" }}>
+                Cadastre-se
+              </Text>
+            </Link>
+          </ThemedText>
+        </View>
       </ThemedView>
     </TouchableWithoutFeedback>
   );
@@ -72,11 +87,33 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
+  },
+  formContainer: {
+    height: "50%",
+    width: "80%",
+    alignItems: "center",
+    backgroundColor: "#f2f2f2",
+    padding: 20,
+    borderRadius: 40,
+    marginTop: -65
+  },
+  inputContainer: {
+    width: "100%",
+    marginTop: 40
+  },
+  header: {
+    width: "180%",
+    height: "30%",
+    alignItems: "center",
     justifyContent: "center",
+    backgroundColor: "green",
+    borderBottomLeftRadius: 225,
+    borderBottomRightRadius: 225,
   },
   title: {
     fontWeight: "bold",
     fontSize: 18,
+    right: 60
   },
   pressed: {
     opacity: 0.8,

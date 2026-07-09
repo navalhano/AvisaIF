@@ -9,6 +9,7 @@ import {
   Pressable,
 } from "react-native";
 import { router } from "expo-router";
+import { Link } from "expo-router";
 import { Nav } from "../components/nav";
 import { Card } from "../components/Card";
 import { useApp } from "../hooks/useAppHook";
@@ -19,7 +20,7 @@ const Home = () => {
   return (
     <SafeAreaView style={styles.container}>
       <Nav />
-
+      <Link href="/login"><Text>Login page</Text></Link>
       <View style={styles.list}>
         <FlatList
           data={eventos}

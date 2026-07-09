@@ -14,7 +14,6 @@ import ThemedText from "../components/ThemedText";
 import ThemedView from "../components/ThemedView";
 import ThemedButton from "../components/ThemedButton";
 import ThemedTextInput from "../components/ThemedTextInput";
-import Teste from "../components/Teste";
 
 const dataMask = [/\d/, /\d/, "/", /\d/, /\d/, "/", /\d/, /\d/, /\d/, /\d/];
 
@@ -46,7 +45,6 @@ export default function CreateAvisoForm() {
     router.back();
   }
   console.log("ThemedTextInput:", ThemedTextInput);
-  console.log("Teste:", Teste);
   console.log("ThemedButton:", ThemedButton);
   return (
     <ThemedView style={styles.container} safe = {true}>
