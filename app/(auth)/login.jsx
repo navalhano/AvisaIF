@@ -8,18 +8,36 @@ import {
 } from "react-native";
 import { Link } from "expo-router";
 import { useState } from "react";
-import ThemedView from "../../components/ThemedView";
-import ThemedTextInput from "../../components/ThemedTextInput";
-import ThemedButton from "../../components/ThemedButton";
-import Spacer from "../../components/Spacer";
-import ThemedText from "../../components/ThemedText";
 
-import Octicons from '@expo/vector-icons/Octicons';
+//hooks
+import useAuth from "@/hooks/useAuthHook";
+
+//themed components
+import ThemedView from "@/components/ThemedView";
+import ThemedTextInput from "@/components/ThemedTextInput";
+import ThemedButton from "@/components/ThemedButton";
+import Spacer from "@/components/Spacer";
+import ThemedText from "@/components/ThemedText";
+
 
 
 const Login = () => {
+  const { login } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  async function handleLogin() {
+    try {
+      setLoading(true);
+      await login(email, password);
+    } catch (error) {
+      console.log(error.code);
+      console.log(error.message);
+    } finally {
+      setLoading(false);
+    }
+  }
   return (
 
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -59,7 +77,14 @@ const Login = () => {
               secureTextEntry
             />
           </View>
-          <ThemedButton style={{ width: "70%", height: 50, borderRadius: 10 }}>
+          <ThemedButton
+            style={{
+              width: "70%",
+              height: 50,
+              borderRadius: 10
+            }}
+            disabled={loading}
+            onPress={handleLogin}>
             <ThemedText
               style={{ color: "#f2f2f2", fontWeight: "bold", fontSize: 20 }}
             >
@@ -106,7 +131,7 @@ const styles = StyleSheet.create({
     height: "30%",
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "green",
+    backgroundColor: "#43a24f",
     borderBottomLeftRadius: 225,
     borderBottomRightRadius: 225,
   },

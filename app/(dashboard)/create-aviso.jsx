@@ -8,12 +8,12 @@ import {
   TextInput,
   StyleSheet,
 } from "react-native";
-import { Nav } from "../components/nav";
-import { useApp } from "../hooks/useAppHook";
-import ThemedText from "../components/ThemedText";
-import ThemedView from "../components/ThemedView";
-import ThemedButton from "../components/ThemedButton";
-import ThemedTextInput from "../components/ThemedTextInput";
+import { Nav } from "@/components/nav";
+import { useApp } from "@/hooks/useAppHook";
+import ThemedText from "@/components/ThemedText";
+import ThemedView from "@/components/ThemedView";
+import ThemedButton from "@/components/ThemedButton";
+import ThemedTextInput from "@/components/ThemedTextInput";
 
 const dataMask = [/\d/, /\d/, "/", /\d/, /\d/, "/", /\d/, /\d/, /\d/, /\d/];
 

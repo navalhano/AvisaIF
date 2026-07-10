@@ -1,6 +1,6 @@
 import { createContext, useState } from "react";
 
-export const AppContext = createContext();
+export const AppContext = createContext(null);
 
 export function AppProvider({ children }) {
   const [avisos, setAvisos] = useState([]);

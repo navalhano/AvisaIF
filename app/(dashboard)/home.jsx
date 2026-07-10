@@ -10,9 +10,9 @@ import {
 } from "react-native";
 import { router } from "expo-router";
 import { Link } from "expo-router";
-import { Nav } from "../components/nav";
-import { Card } from "../components/Card";
-import { useApp } from "../hooks/useAppHook";
+import { Nav } from "@/components/nav";
+import { Card } from "@/components/Card";
+import { useApp } from "@/hooks/useAppHook";
 
 const Home = () => {
   const [expanded, setExpanded] = useState(false);

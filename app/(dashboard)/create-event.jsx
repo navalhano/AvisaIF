@@ -3,11 +3,11 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import MaskInput from "react-native-mask-input";
 import { router } from "expo-router";
 import { Text, View, Pressable, StyleSheet } from "react-native";
-import { useApp } from "../hooks/useAppHook";
-import { Nav } from "../components/nav";
-import ThemedTextInput from "../components/ThemedTextInput";
-import ThemedText from "../components/ThemedText";
-import ThemedButton from "../components/ThemedButton";
+import { useApp } from "@/hooks/useAppHook";
+import { Nav } from "@/components/nav";
+import ThemedTextInput from "@/components/ThemedTextInput";
+import ThemedText from "@/components/ThemedText";
+import ThemedButton from "@/components/ThemedButton";
 
 const dataMask = [/\d/, /\d/, "/", /\d/, /\d/, "/", /\d/, /\d/, /\d/, /\d/];
 
