@@ -14,13 +14,12 @@ export function AuthProvider({ children }) {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
+      console.log("onAuthStateChanged disparou, user:", user);
       setUser(user);
       setLoading(false);
     });
-
     return () => unsubscribe();
   }, []);
-
   const login = async (email, password) => {
     await signInWithEmailAndPassword(auth, email, password);
   }
@@ -29,7 +28,9 @@ export function AuthProvider({ children }) {
 
   }
   const logout = async () => {
+    console.log("antes do signOut");
     await signOut(auth);
+    console.log("depois do signOut");
   }
   return (
     <AuthContext.Provider value={{ user, loading, login, register, logout }}>

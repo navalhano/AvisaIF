@@ -41,14 +41,14 @@ const Home = () => {
         {expanded && (
           <>
             <Pressable
-              style={[styles.option, { bottom: 90 }]}
+              style={[styles.option, { bottom: 100 }]}
               onPress={() => router.push("/create-event")}
             >
               <Text style={{ fontFamily: "Poppins_400Regular" }}>Evento</Text>
             </Pressable>
 
             <Pressable
-              style={[styles.option, { bottom: 140 }]}
+              style={[styles.option, { bottom: 150 }]}
               onPress={() => router.push("/create-aviso")}
             >
               <Text style={{ fontFamily: "Poppins_400Regular" }}>Aviso</Text>
@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
   //fab
   fab: {
     position: "absolute",
-    bottom: 20,
+    bottom: 50,
     right: 20,
 
     width: 40,
